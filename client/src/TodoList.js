@@ -1,18 +1,29 @@
 import React, {Component} from 'react'
 
 class TodoList extends Component{
+
     render(){
+
         var forEachItem = this.props.arr.map(
+
             eachItem => {
-                return (
+            if (eachItem.isDone = true){
+                eachItem.isDone = "is done"
+            }
+            else
+            {
+                eachItem.isDone = "is not done"
+            }
+        return (
                     <div>
-                        <p>{eachItem.username} has to {eachItem.todo} is {eachItem.isDone.toString()}  </p>
+                        <p>{eachItem.username} has to {eachItem.todo} {eachItem.isDone.toString()}  </p>
                         {/*<p>{eachItem.todo}</p>*/}
                         {/*<p>{eachItem.isDone}</p>*/}
                     <hr/>
                     </div>
                 )
             }
+
         );
         return(
             <div>

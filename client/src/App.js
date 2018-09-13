@@ -21,10 +21,13 @@ class App extends Component {
             ]
 
         }
+
     }
 
 
+
     render() {
+
       // let todoArray = [
       //     {
       //         username: "Maddi",
@@ -47,6 +50,7 @@ class App extends Component {
       //    console.log(data.json());
       //    data.json();
       // });
+
 
     return (
       <div className="App">
