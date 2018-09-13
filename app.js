@@ -14,7 +14,7 @@ const setupController = require('./controllers/setupController');
 const apiController = require('./controllers/apiController');
 
 // Set express to listen to the public directory
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 5001;
 
 // This setups a place to serve static content from the directory ./public but we will use an alias called /assets
 app.use('/assets', express.static(__dirname + '/public')); // __dirname will be set to the directory we are running the node app from

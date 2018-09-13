@@ -7,7 +7,7 @@ module.exports = {
 
     getDbConnectionString: function () {
         // return 'YOUR_MONGO_URL';
-        return 'mongodb://' + configValues.uname + ':' + configValues.pwd + '@blah_blah_blah';
+        return 'mongodb://' + configValues.uname + ':' + configValues.pwd + '@ds159217.mlab.com:59217/nodetodomc';
     },
 
 
