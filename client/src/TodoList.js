@@ -7,7 +7,7 @@ class TodoList extends Component{
         var forEachItem = this.props.arr.map(
 
             eachItem => {
-            if (eachItem.isDone = true){
+            if (eachItem.isDone == true){
                 eachItem.isDone = "is done"
             }
             else
