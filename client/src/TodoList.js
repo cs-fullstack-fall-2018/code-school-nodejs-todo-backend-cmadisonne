@@ -1,36 +1,47 @@
 import React, {Component} from 'react'
 
-class TodoList extends Component{
+class TodoList extends Component {
 
-    render(){
+    mapArray() {
+        if (this.props.isDone == true) {
+            this.props.isDone = "is done";
+            <strike>{this.props.data}</strike>
+        }
+        else {
+            this.props.isDone = "is not done"
+        }
+
+    }
+
+
+    render() {
 
         var forEachItem = this.props.arr.map(
-
-            eachItem => {
-            if (eachItem.isDone == true){
-                eachItem.isDone = "is done"
-            }
-            else
-            {
-                eachItem.isDone = "is not done"
-            }
-        return (
-                    <div>
-                        <p>{eachItem.username} has to {eachItem.todo} {eachItem.isDone.toString()}  </p>
-                        {/*<p>{eachItem.todo}</p>*/}
-                        {/*<p>{eachItem.isDone}</p>*/}
-                    <hr/>
-                    </div>
-                )
-            }
-
+            eachItem => {this.mapArray()}
         );
-        return(
+
+        return (
+            <div>
+                {/*<p>{eachItem.username} has to {eachItem.todo} {eachItem.isDone.toString()}  </p>*/}
+                <p>{eachItem._id}</p>
+                <p>{eachItem.username}</p>
+                <p>{eachItem.todo}</p>
+                <p>{eachItem.isDone}</p>
+                <button onClick={() => this.props.deleteFunction(eachItem._id)}>Delete</button>
+                <hr/>
+            </div>
+        );
+
+        return (
             <div>
                 <h2>{forEachItem}</h2>
             </div>
-        )
+        );
     }
+
 }
+
+
+
 
 export default TodoList;

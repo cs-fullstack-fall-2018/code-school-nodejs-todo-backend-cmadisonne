@@ -24,27 +24,27 @@ class App extends Component {
 
     }
 
+    deleteByID (id) {
+        console.log("Delete this ID: " + id);
+        fetch('/api/todo',
+            {
+                method: "DELETE",
+                body: JSON.stringify({"id": id}),
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(data => data.json());
 
+            }
 
     render() {
 
-      // let todoArray = [
-      //     {
-      //         username: "Maddi",
-      //         todo: "live",
-      //         isDone: true
-      //     },
-      //     {
-      //         username: "Maddi",
-      //         todo: "love",
-      //         isDone: true
-      //     }
-      // ];
       // console.log(todoArray);
 
       fetch('/api/todos/mcoope')
           .then(data => data.json())
-      .then(response => this.setState({data: response}));
+          .then(response => this.setState({data: response}));
       // {
       //    console.log(data);
       //    console.log(data.json());
@@ -59,7 +59,7 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
           {/*<TodoList arr={todoArray}/>*/}
-          <TodoList arr={this.state.data}/>
+          <TodoList arr={this.state.data} deleteFunction={this.deleteByID}/>
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>

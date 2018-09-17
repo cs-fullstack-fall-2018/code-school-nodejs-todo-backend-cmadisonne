@@ -9,6 +9,31 @@ module.exports = function (app) {
     app.use(bodyParser.json()); // Use body parser middleware
     app.use(bodyParser.urlencoded({extended: true})); // Parse out any JSON from body and handle URL encoded data
 
+    //Gets ToDos with late due dates
+    app.get('/api/todos/age/:numdays', function (req, res) {
+        // const numdays = 5;
+        const age = moment().subtract(req.params.numdays, 'days').calendar();
+        Todos.find({dueDate: {$lte:age}}, function (err, todos) {
+            if (err) {
+                throw err; // If we get an error then bail
+            }
+            // Use Express to send the JSON back to the client in the web response
+            res.send({$and: [{todos:dueDate = 'false'}, {todos:dueDate <= age}]});
+        })
+    });
+
+
+    //Get all open ToDos
+    app.get('/api/todos/all/open', function (req, res) {
+       Todos.find({isDone: false}, function (err, todos) {
+           if (err) {
+               throw err; // If we get an error then bail
+           }
+           // Use Express to send the JSON back to the client in the web response
+           res.send(todos);
+       })
+    });
+
     //  Add a method to get all todos for a particular User (uname)
     app.get('/api/todos/:uname', function (req, res) {
 
@@ -75,7 +100,7 @@ module.exports = function (app) {
     // ROUTE: DELETE an existing todo item by its ID
     app.delete('/api/todo', function (req, res) {
 
-        Todos.findOneAndDelete(req.body.id, function (err) {
+        Todos.findByIdAndRemove(req.body.id, function (err) {
             if (err) {
                 throw err; // If we get an error then bail
             }
