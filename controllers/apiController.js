@@ -1,5 +1,6 @@
 // We first need to load our mongoose data model
 const Todos = require('../models/todoModel');
+const moment = require('moment');
 
 // Include body parser
 const bodyParser = require('body-parser'); // In node_modules
@@ -10,15 +11,17 @@ module.exports = function (app) {
     app.use(bodyParser.urlencoded({extended: true})); // Parse out any JSON from body and handle URL encoded data
 
     //Gets ToDos with late due dates
-    app.get('/api/todos/age/:numdays', function (req, res) {
+    app.get('/api/todo/age/:numdays', function (req, res) {
         // const numdays = 5;
-        const age = moment().subtract(req.params.numdays, 'days').calendar();
-        Todos.find({dueDate: {$lte:age}}, function (err, todos) {
+        let ageDate = req.params.numdays;
+        var age = moment().subtract(ageDate, 'days');
+
+        Todos.find({$and: [{dueDate: {$lte:age}}, {isDone: false}]}, function (err, todos) {
             if (err) {
                 throw err; // If we get an error then bail
             }
             // Use Express to send the JSON back to the client in the web response
-            res.send({$and: [{todos:dueDate = 'false'}, {todos:dueDate <= age}]});
+            res.send(todos);
         })
     });
 
